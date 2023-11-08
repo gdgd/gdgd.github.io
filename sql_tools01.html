@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <textarea id="txt1" name="txt1" rows="5" cols="33"></textarea>
+    </div>
+    <div>
+        <input id="bt1" type="button" value="変換">
+        <input id="checkbox1" type="checkbox" checked>「"」を付ける
+    </div>
+    <div>
+        <label id="label1" name="label1">
+        </label>
+    </div>
+
+</body>
+<script>
+    var b1 = document.getElementById("bt1")
+    
+    b1.addEventListener("click", function() {
+        const txt1 = document.getElementById("txt1").value
+        const label1 = document.getElementById("label1")
+        const isChecked = document.getElementById("checkbox1").checked
+        const trm = txt1.trim()
+        const list = trm.split(/\r\n|\n|\r/g)
+        let temp = ""
+        console.log(list)
+        for(let i=0; i < list.length; i++){
+            if(list[i].length){
+                if(isChecked){
+                    if(i == 0){
+                        temp  += '"' + list[i].trim() + '"\n' 
+                    }else{
+                        temp  += ',"' + list[i].trim() + '"\n' 
+                    }
+                }else{
+                    if(i == 0){
+                        temp  += list[i].trim() + '\n' 
+                    }else{
+                        temp  += ',' + list[i].trim() + '\n' 
+                    }
+
+                }
+            }
+        }
+        label1.innerText = temp
+    },false)
+
+
+</script>
+</html>
